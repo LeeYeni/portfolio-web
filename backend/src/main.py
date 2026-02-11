@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
-from src.api import chatbot, guest, email, project, credential, recruiter, admin
+from src.api import chatbot, guest, email, project, credential, admin
 from src.entity.base import init_db
 import uvicorn
 from dotenv import load_dotenv
@@ -36,7 +36,6 @@ app.include_router(guest.router)
 app.include_router(email.router)
 app.include_router(project.router)
 app.include_router(credential.router)
-app.include_router(recruiter.router)
 app.include_router(admin.router)
 
 @app.get("/")
