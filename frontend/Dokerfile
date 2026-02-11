@@ -1,0 +1,21 @@
+# 1. 사용할 이미지
+FROM node:22-alpine
+
+# 2. 컨테이너 내부 작업 디렉토리 설정
+WORKDIR /app
+
+# 3. 의존성 파일 복사 및 설치
+COPY package.json package-lock.json ./
+RUN npm install
+
+# 4. 나머지 모든 소스 코드 복사
+COPY . .
+
+# 5. Next.js 빌드
+RUN npm run build
+
+# 6. 포트 개방
+EXPOSE 3000
+
+# 7. 서버 실행
+CMD ["npm", "start"]

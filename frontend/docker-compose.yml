@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: 
+      context: . # Dockerfile이 있는 폴더 경로
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
