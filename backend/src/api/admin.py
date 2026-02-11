@@ -3,7 +3,7 @@ from src.api.dependency import get_recruiter_service
 from src.service.recruiter_service import RecruiterService
 from src.service.project_service import ProjectService
 from src.service.credential_service import CredentialService
-from src.schema.recruiter_schema import DeleteRecruiterResponse
+from src.schema.recruiter_schema import DeleteRecruiterResponse, RecruiterResponse
 from src.schema.project_schema import (
     ProjectResponse,
     AddProjectRequest,
@@ -16,11 +16,19 @@ from src.schema.credential_schema import (
     UpdateCredentialRequest,
     DeleteCredentialResponse
 )
+from typing import List
 
 router = APIRouter(
     prefix="/api/admin",
     tags=["Admin"]
 )
+
+@router.get("/", response_model=List[RecruiterResponse])
+def get_all(service: RecruiterService = Depends(get_recruiter_service)):
+    """
+    인사담당자 정보를 전부 조회합니다.
+    """
+    return service.get_all()
 
 @router.delete("/recruiter/{id}", response_model=DeleteRecruiterResponse)
 def delete(
